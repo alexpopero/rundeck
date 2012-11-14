@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+#
+#/ command: rundeck:create-job: "create a rundeck job from a job file"
+#
+#/ usage: rerun rundeck:create-job [options]
+#
+#/ rerun env variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option variables: 
+
+# Read module function library.
+. $RERUN_MODULE_DIR/lib/functions.sh || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+# Parse the command options.
+[[ -r $RERUN_MODULE_DIR/commands/create-job/options.sh ]] && {
+    . $RERUN_MODULE_DIR/commands/create-job/options.sh || rerun_die "Failed loading options parser."
+    rerun_options_parse "$@"
+}
+
+
+# Error handling
+# ---------------
+# * Trap calls `rerun_die` with standard message.
+# * Exit upon command errors or accessing unset variables.
+#   * See [set](http://ss64.com/bash/set.html)
+trap 'rerun_die "*** command failed: rundeck:create-job. ***"' ERR
+set -o nounset -o pipefail
+
+
+# ------------------------------
+# Your implementation goes here.
+# ------------------------------
+
+
+loadJob() {
+   url="$1"
+   file="$2"
+   cookieFile="$3"
+   apiVersion=$4
+
+   APIURL="${url}/api/${apiVersion}"
+   runurl="${APIURL}/jobs/import"
+   ulopts="-F xmlBatch=@${file}"
+   CURLOPTS="-s -S -L -c ${cookieFile} -b ${cookieFile}"
+   curl -o /dev/null -s -k -f ${CURLOPTS} ${ulopts} "${runurl}"
+}
+
+cookiesTmp="$(mktemp)"
+if ! doLogin "${RUNDECK_URL}" "${USERNAME}" "${PASSWORD}" "${cookiesTmp}"
+then
+   echo "Rundeck login failed, url: ${RUNDECK_URL}" 1>&2
+   exit 1
+fi
+
+if ! loadJob "${RUNDECK_URL}" ${FILE} "${cookiesTmp}" $API_VERSION
+then
+   echo "Unable to load Rundeck job file ${FILE}" 1>&2
+   exit 1
+fi
+
+exit $?
+
+# Done

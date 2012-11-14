@@ -32,7 +32,15 @@ set -o nounset -o pipefail
 # Your implementation goes here.
 # ------------------------------
 
-sudo service rundeckd stop
+
+#asynchronously execute the shutdown service script so that we may immediately monitor the log for important message 
+#remember the pid so we may kill it later if needed.
+sudo service rundeckd stop 
+
+INTERVAL=2
+COUNT=90
+
+timeout $((INTERVAL*COUNT))   bash -c 'while [ 1 ]; do netstat -an |grep -q '4440.*LISTEN' || { break; }; sleep ${INTERVAL}; done'
 
 exit $?
 

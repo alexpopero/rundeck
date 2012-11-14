@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+#
+#/ command: rundeck:run-job: "run a rundeck job identified by its uuid"
+#
+#/ usage: rerun rundeck:run-job [options]
+#
+#/ rerun env variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option variables: 
+
+# Read module function library.
+. $RERUN_MODULE_DIR/lib/functions.sh || { 
+  echo >&2 "Failed loading function library." ; exit 1 ; 
+}
+
+# Parse the command options.
+[[ -r $RERUN_MODULE_DIR/commands/run-job/options.sh ]] && {
+    . $RERUN_MODULE_DIR/commands/run-job/options.sh || rerun_die "Failed loading options parser."
+    rerun_options_parse "$@"
+}
+
+
+# Error handling
+# ---------------
+# * Trap calls `rerun_die` with standard message.
+# * Exit upon command errors or accessing unset variables.
+#   * See [set](http://ss64.com/bash/set.html)
+trap 'rerun_die "*** command failed: rundeck:run-job. ***"' ERR
+set -o nounset -o pipefail
+
+
+# ------------------------------
+# Your implementation goes here.
+# ------------------------------
+
+
+runJob() {
+   url="$1"
+   uuid="$2"
+   cookieFile="$3"
+   apiVersion=$4
+
+
+   APIURL="${url}/api/${apiVersion}"
+   CURLOPTS="-f -s -S -L -b ${cookieFile}"
+   runurl="${APIURL}/job/${UUID}/run"
+
+   curlTmp=$(mktemp)
+
+   curl -o ${curlTmp}  ${CURLOPTS} "http://localhost:4440/api/5/job/test-hello-world/run"
+
+
+   if ! ifSucc=$(xmlstarlet sel -T -t -v "/result/@success" "${curlTmp}")
+   then
+      echo "xmlstarlet of curl output: ${curlTmp} failed" 1>&2
+      return 1
+   fi
+   if [ "${ifSucc}" != "true" ]
+   then
+      echo "url ${runurl} job run failed, status: ${ifSucc}" 1>&2
+      return 1
+   fi
+
+   rm -f "${curlTmp}"
+}
+
+cookiesTmp="$(mktemp)"
+if ! doLogin "${RUNDECK_URL}" "${USERNAME}" "${PASSWORD}" "${cookiesTmp}"
+then
+   echo "Rundeck login failed, url: ${RUNDECK_URL}" 1>&2
+   exit 1
+fi
+
+if ! runJob "${RUNDECK_URL}" ${UUID} "${cookiesTmp}" $API_VERSION
+then
+   echo "Unable to execute UUID ${UUID} via rundeck url: ${RUNDECK_URL}" 1>&2
+   exit 1
+fi
+
+rm -f "${cookiesTmp}"
+
+exit $?
+
+# Done

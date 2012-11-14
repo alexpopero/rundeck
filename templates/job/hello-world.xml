@@ -1,0 +1,22 @@
+<joblist>
+  <job>
+    <uuid>${PROJECT_NAME}-${JOB_NAME}</uuid>
+    <id>${PROJECT_NAME}-${JOB_NAME}</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>echo hello ${option.hello}</exec>
+      </command>
+    </sequence>
+    <description>${JOB_NAME}</description>
+    <name>${JOB_NAME}</name>
+    <context>
+      <project>${PROJECT_NAME}</project>
+      <options>
+        <option required='true' name='hello' value='world'>
+          <description>hello parameter</description>
+        </option>
+      </options>
+    </context>
+  </job>
+</joblist>

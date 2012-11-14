@@ -34,6 +34,11 @@ set -o nounset -o pipefail
 
 sudo service rundeckd start
 
+INTERVAL=2
+COUNT=90
+
+timeout $((INTERVAL*COUNT))  grep -q '4440.*LISTEN' <(netstat -an  -c ${INTERVAL})
+
 exit $?
 
 # Done
