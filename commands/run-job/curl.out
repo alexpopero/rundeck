@@ -1,1 +1,0 @@
-<result error='true' apiversion='5'><error code='unauthorized'><message>(unauthenticated) is not authorized for: /api/5/jobs/import</message></error></result>
