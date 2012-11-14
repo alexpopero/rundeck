@@ -51,7 +51,7 @@ then
    else
       sudo groupdel rundeck 
    fi
-   sudo rm -rf /var/lib/rundeck /var/log/rundeck
+   sudo rm -rf /var/lib/rundeck /var/log/rundeck /var/rundeck
 fi
 
 exit $?
