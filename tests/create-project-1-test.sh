@@ -16,6 +16,6 @@ it_fails_without_arguments() {
 }
 
 it_runs_with_project() {
-    rerun rundeck:create-project --name donkey
-    grep "^project.name=donkey$"  /var/rundeck/projects/donkey/etc/project.properties
+    rerun rundeck:create-project --name test
+    grep "^project.name=test$"  /var/rundeck/projects/test/etc/project.properties
 }
