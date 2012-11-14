@@ -1,0 +1,22 @@
+<joblist>
+  <job>
+    <id>3a9b100d-70da-4c60-b8e9-1372502cf9d0</id>
+    <loglevel>INFO</loglevel>
+    <sequence keepgoing='false' strategy='node-first'>
+      <command>
+        <exec>echo hello ${option.hello}</exec>
+      </command>
+    </sequence>
+    <description>hello world</description>
+    <name>hello-world</name>
+    <context>
+      <project>test</project>
+      <options>
+        <option required='true' name='hello' value='world'>
+          <description>hello parameter</description>
+        </option>
+      </options>
+    </context>
+    <uuid>3a9b100d-70da-4c60-b8e9-1372502cf9d0</uuid>
+  </job>
+</joblist>
