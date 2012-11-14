@@ -16,6 +16,10 @@ it_fails_without_arguments() {
 }
 
 it_runs_with_project() {
-    rerun rundeck:create-project --name test
+    rerun rundeck: install 
+    rerun rundeck: create-project --name test
     grep "^project.name=test$"  /var/rundeck/projects/test/etc/project.properties
+    rerun rundeck: start
+    rerun rundeck: stop
+    rerun rundeck: remove --cleanup true
 }
