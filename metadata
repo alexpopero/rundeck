@@ -3,6 +3,6 @@
 NAME=rundeck
 DESCRIPTION="Rerun module to manage Rundeck installation configuration and operations"
 INTERPRETER="bash"
-VERSION=
-REQUIRES=
+VERSION=1.0
+REQUIRES=rpm
 
