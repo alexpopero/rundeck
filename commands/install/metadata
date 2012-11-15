@@ -3,4 +3,4 @@
 # Tue Nov 13 14:45:41 PST 2012
 NAME=install
 DESCRIPTION="Install the rundeck distribution"
-OPTIONS=
+OPTIONS="grant-rundeck-sudo"
