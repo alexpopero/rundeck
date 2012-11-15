@@ -3,4 +3,4 @@
 # Tue Nov 13 17:01:18 PST 2012
 NAME=create-project
 DESCRIPTION="create a rundeck project"
-OPTIONS=
+OPTIONS="name"

@@ -2,7 +2,7 @@
 #
 #/ command: rundeck:create-project: "create a rundeck project"
 #
-#/ usage: rerun rundeck:create-project [options]
+#/ usage: rerun rundeck:create-project  --name|-n <> 
 #
 #/ rerun env variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
 #/ option variables: NAME
