@@ -2,4 +2,5 @@
 
 <project>
   <node name="localhost" description="Rundeck server node" tags="" hostname="localhost" osArch="amd64" osFamily="unix" osName="Linux" osVersion="2.6.32-220.el6.x86_64" username="rundeck"/>
+  <node name="${user}-localhost" description="Rundeck server node dispatched to ${user}" tags="toolchain-user" hostname="localhost" osArch="${uname_m}" osFamily="unix" osName="${uname}" osVersion="${uname_r}" username="${user}"/>
 </project>

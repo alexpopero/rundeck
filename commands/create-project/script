@@ -42,7 +42,20 @@ projectTmpDir="$(mktemp -d)"
 
 cp -r "${RERUN_MODULE_DIR}"/templates/project/* "${projectTmpDir}"
 
-sed -i -e "s+\${PROJECT_NAME}+${NAME}+g" "${projectTmpDir}"/etc/project.properties
+sed -i \
+       -e "s+\${PROJECT_NAME}+${NAME}+g" \
+       "${projectTmpDir}"/etc/project.properties
+
+UNAME="$(uname)"
+UNAME_m="$(uname -m)"
+UNAME_r="$(uname -r)"
+
+sed -i \
+       -e "s+\${user}+${USER}+g" \
+       -e "s+\${uname}+${UNAME}+g" \
+       -e "s+\${uname_m}+${UNAME_m}+g" \
+       -e "s+\${uname_r}+${UNAME_r}+g" \
+       "${projectTmpDir}"/etc/resources.xml
 
 sudo mv  "${projectTmpDir}" /var/rundeck/projects/"${NAME}"
 sudo chown -R rundeck:rundeck /var/rundeck/projects/"${NAME}"
