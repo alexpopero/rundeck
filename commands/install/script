@@ -35,19 +35,6 @@ set -o nounset -o pipefail
 sudo yum -y --nogpgcheck localinstall  http://repo.rundeck.org/latest.rpm
 sudo yum -y install rundeck
 
-if [ "${GRANT_RUNDECK_SUDO}" = "true" ]
-then
-   #
-   #append wheel to the rundeck list of groups
-   #
-   sudo /usr/sbin/usermod --groups wheel -a rundeck
-
-   #
-   # enable all commands and NOPASSWD for wheel group members
-   #
-   sudo sed -i 's,^#[ ]*\(.*%wheel.*NOPASSWD:.*\),\1,' /etc/sudoers 
-fi
-
 exit $?
 
 # Done
