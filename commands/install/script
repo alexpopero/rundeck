@@ -32,8 +32,8 @@ set -o nounset -o pipefail
 # Your implementation goes here.
 # ------------------------------
 
-sudo yum -y --nogpgcheck localinstall  http://repo.rundeck.org/latest.rpm
-sudo yum -y install rundeck
+sudo yum --quiet -y --nogpgcheck localinstall  http://repo.rundeck.org/latest.rpm
+sudo yum --quiet -y install rundeck
 
 exit $?
 
