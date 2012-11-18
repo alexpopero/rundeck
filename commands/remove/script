@@ -34,11 +34,11 @@ set -o nounset -o pipefail
 
 rerun rundeck:stop
 
-sudo yum -y remove rundeck
+sudo yum --quiet -y remove rundeck
 
 if [ "${CLEANUP}" = "true" ]
 then
-   sudo yum -y remove rundeck-repo
+   sudo yum --quiet -y remove rundeck-repo
 
    if ! getent passwd rundeck >/dev/null 
    then
