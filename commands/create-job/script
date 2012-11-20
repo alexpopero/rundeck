@@ -44,6 +44,7 @@ loadJob() {
    ulopts="-F xmlBatch=@${file}"
    CURLOPTS="-s -S -L -c ${cookieFile} -b ${cookieFile}"
    curl -o /dev/null -s -k -f ${CURLOPTS} ${ulopts} "${runurl}"
+   curl -o /dev/null -s -k -f ${CURLOPTS} ${ulopts} "${runurl}?dupeOption=update"
 }
 
 cookiesTmp="$(mktemp)"
