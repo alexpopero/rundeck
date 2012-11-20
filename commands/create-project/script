@@ -40,10 +40,13 @@ fi
 
 projectTmpDir="$(mktemp -d)"
 
+TIMESTAMP="$(date)"
+
 cp -r "${RERUN_MODULE_DIR}"/templates/project/* "${projectTmpDir}"
 
 sed -i \
        -e "s+\${PROJECT_NAME}+${NAME}+g" \
+       -e "s+\${TIMESTAMP}+${TIMESTAMP}+g" \
        "${projectTmpDir}"/etc/project.properties
 
 UNAME="$(uname)"
