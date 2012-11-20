@@ -35,6 +35,13 @@ set -o nounset -o pipefail
 
 #asynchronously execute the shutdown service script so that we may immediately monitor the log for important message 
 #remember the pid so we may kill it later if needed.
+
+if ! /sbin/chkconfig rundeckd
+then
+  exit 0
+fi
+
+
 sudo service rundeckd stop 
 
 INTERVAL=2
