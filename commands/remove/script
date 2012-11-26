@@ -32,6 +32,8 @@ set -o nounset -o pipefail
 # Your implementation goes here.
 # ------------------------------
 
+rerun rundeck:stop
+
 sudo yum -y remove rundeck
 
 if [ "${CLEANUP}" = "true" ]
