@@ -4,8 +4,8 @@
 #
 #/ usage: rerun rundeck:run-job [options]
 #
-#/ rerun env variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
-#/ option variables: 
+#/ rerun-variables: RERUN, RERUN_VERSION, RERUN_MODULES, RERUN_MODULE_DIR
+#/ option-variables: 
 
 # Read module function library.
 . $RERUN_MODULE_DIR/lib/functions.sh || { 
