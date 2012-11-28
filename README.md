@@ -3,7 +3,7 @@ Rerun Rundeck module
 
 Rerun module to manage Rundeck installation, configuration and operations
 
-Installation
+Rerun and Rerun Module Installation
 ------------
 
 * Install Rerun itself by obtaining the latest "rerun" RPM package link from [Rerun Downloads](https://github.com/rerun/rerun/downloads) page and executing the following command (replacing example URL):
@@ -49,3 +49,22 @@ Available modules in "/usr/lib/rerun/modules":
 </pre>
 
 * Note that several commands rely on xmlstarlet(1) (which is available from [EPEL](http://fedoraproject.org/wiki/EPEL)).
+
+An example of using the Rerun Rundeck module from installing, creating a project, starting the server, and creating a job
+------------
+* Install, create a project, start the Rundeck server, and create a job
+<pre>
+[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:install
+Failed to set locale, defaulting to C
+Failed to set locale, defaulting to C
+[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:create-project
+[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:create-project --name test
+[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:start  
+Starting rundeckd:                                         [  OK  ]
+nohup: redirecting stderr to stdout
+[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:create-job --file /home/chuck/workspace/rerun-modules/rundeck/templates/job/hello-world.xml 
+</pre>
+
+
+
+
