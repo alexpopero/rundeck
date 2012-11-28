@@ -1,6 +1,6 @@
 <joblist>
   <job>
-    <uuid>${PROJECT_NAME}-${JOB_NAME}</uuid>
+    <uuid>${UUID}</uuid>
     <id>${PROJECT_NAME}-${JOB_NAME}</id>
     <loglevel>INFO</loglevel>
     <sequence keepgoing='false' strategy='node-first'>

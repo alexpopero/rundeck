@@ -1,9 +1,8 @@
 #!/usr/bin/env roundup
 #
-# This file contains the test plan for the create-job command.
-# Execute the plan by invoking: 
+# This file contains the test plan for the `delete-job` command.
 #    
-#     rerun stubbs:test -m rundeck -p create-job
+#/ usage:  rerun stubbs:test -m rundeck -p delete-job [--answers <>]
 #
 
 # Helpers
@@ -13,11 +12,12 @@
 # The Plan
 # --------
 
-describe "create-job"
+describe "delete-job"
 
 it_fails_without_arguments() {
-    rerun rundeck:create-job || { true; }
+    rerun rundeck:delete-job || { true; }
 }
+
 it_runs_with_arguments() {
 
     rerun rundeck: install
@@ -33,6 +33,8 @@ it_runs_with_arguments() {
     rerun rundeck: create-job --file "${tmpJobXml}" --username admin --password admin
 
     rm -f "${tmpJobXml}"
+
+    rerun rundeck:delete-job --uuid "test-hello-world" --username admin --password admin
 
     rerun rundeck: stop
 
