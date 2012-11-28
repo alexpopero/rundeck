@@ -1,4 +1,4 @@
-[Rundeck](http://rundeck.org), an operational deployment console, plays a critical role in Continuous Deployment (automated deployments within a CI loop).  Like any deployed software, configuration and state of your current automation must be maintained.  
+[Rundeck](http://rundeck.org), an operational deployment console, plays a critical role in Continuous Deployment (including automated deployments within a CI loop).  Like any deployed software, configuration and state of your current automation must be maintained.  
 
 This [Rerun](http://rerun.github.com/rerun) module automates standard practice for installation, management and operations of [Rundeck](http://rundeck.org) based on the [Red Hat/CentOS/Fedora](http://repo.rundeck.org/latest.rpm) distribution that results in the instance running as the rundeck user out of /var/lib/rundeck.
 
