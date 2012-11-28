@@ -62,7 +62,7 @@ Failed to set locale, defaulting to C
 [chuck@mvn-sdp-0 rundeck]$ rerun rundeck:start  
 Starting rundeckd:                                         [  OK  ]
 nohup: redirecting stderr to stdout
-[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:create-job --file /home/chuck/workspace/rerun-modules/rundeck/templates/job/hello-world.xml 
+[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:create-job --file /home/chuck/workspace/rerun-modules/rundeck/examples/jobs/rundeck-hello-world/job.xml 
 </pre>
 
 
