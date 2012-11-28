@@ -73,7 +73,7 @@ sudo service rundeckd stop
 INTERVAL=2
 COUNT=90
 
-timeout $((INTERVAL*COUNT))   bash -c 'while [ 1 ]; do netstat -an |grep -q '4440.*LISTEN' || { break; }; sleep ${INTERVAL}; done'
+timeout $((INTERVAL*COUNT))   bash -c "while [ 1 ]; do netstat -an |grep -q '4440.*LISTEN' || { break; }; sleep ${INTERVAL}; done"
 
 exit $?
 
