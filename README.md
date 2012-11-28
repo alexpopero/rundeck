@@ -1,20 +1,43 @@
-Rerun Rundeck module
-====================
+[Rundeck](http://rundeck.org), an operational deployment console, plays a critical role in Continuous Deployment (automated deployments within a CI loop).  Like any deployed software, configuration and state of your current automation must be maintained.  
 
-Rerun module to manage Rundeck installation, configuration and operations
+This [Rerun](http://rerun.github.com/rerun) module automates standard practice for installation, management and operations of [Rundeck](http://rundeck.org) based on the [Red Hat/CentOS/Fedora](http://repo.rundeck.org/latest.rpm) distribution that results in the instance running as the rundeck user out of /var/lib/rundeck.
 
-Rerun and Rerun Module Installation
+The Rundeck instance deployed by the module preserves the default authentication and authorization access control.
+
+The commands are written with the expectation that they will be run by a non-root user that has sudo(8) access to run a number of commands (listed below).
+
+The module has the ability to deploy and remove the Rundeck  instance as well as managing its operation and configuration.
+
+Additionally, the module can manage the full-lifecyle of individual jobs.
+
+* Use rundeck:deploy and rundeck:remove to create and destroy the Rundeck instance
+* Use rundeck:start, rundeck:stop, rundeck:status, rundeck:restart to manage the running Rundeck instance
+* Use rundeck:create-job and rundeck:delete-job to manage jobs as XML source
+* Use rundeck:run-job to run a rundeck job
+
+Consult README.md in the command and options directories for further description of using these commands.
+
+Requirements
 ------------
 
-* Install Rerun itself by obtaining the latest "rerun" RPM package link from [Rerun Downloads](https://github.com/rerun/rerun/downloads) page and executing the following command (replacing example URL):
+* Internet access to acquire installation RPMs
+* A Red Hat/CentOS 5 or 6 instance
+* No service running on port 4440 and no firewall blocking that port
+* A non-root user that has non-interactive sudo(8) access to run "chmod", "chown", "groupdel", "mv", "rm", "service", "userdel", "yum" commands as the root user (or simply add the user to the "wheel" group and enable carte-blanche access ;-).
+
+Installation
+------------
+The following instructions describe how to install Rerun itself and the set of modules necessary to use the Rundeck module (and others):
+
+* Install [Rerun](http://rerun.github.com/rerun) itself by obtaining the latest "rerun" RPM package link from [Rerun Downloads](https://github.com/rerun/rerun/downloads) page and executing the following command (replacing example URL):
 <pre>
-[root@centos62 ~]# rpm -Uvh https://github.com/downloads/rerun/rerun/rerun-1.0-124.noarch.rpm
-Retrieving https://github.com/downloads/rerun/rerun/rerun-1.0-124.noarch.rpm
+[root@centos62 ~]# rpm -Uvh https://github.com/downloads/rerun/rerun/rerun-1.0-129.noarch.rpm
+Retrieving https://github.com/downloads/rerun/rerun/rerun-1.0-129.noarch.rpm
 Preparing...                ########################################### [100%]
    1:rerun                  ########################################### [100%]
 </pre>
 
-* Install the latest version of the rerun-modules Yum repo definition by obtaining the latest "rerun-modules-repo" RPM package link from [Rerun Modules Downloads](https://github.com/rerun-modules/rerun-modules/downloads) and executing the following command (replacing example URL): 
+* Install the latest version of the rerun-modules Yum repo definition by obtaining the latest "rerun-modules-repo" (<i>not</i> "rerun-modules-yum-repo")  RPM package link from [Rerun Modules Downloads](https://github.com/rerun-modules/rerun-modules/downloads) and executing the following command (replacing example URL):
 <pre>
 [root@centos62 ~]# rpm -Uvh https://github.com/downloads/rerun-modules/rerun-modules/rerun-modules-repo-1.0-21.noarch.rpm
 Retrieving https://github.com/downloads/rerun-modules/rerun-modules/rerun-modules-repo-1.0-21.noarch.rpm
@@ -31,7 +54,7 @@ Preparing...                ########################################### [100%]
 Complete!
 </pre>
 
-* Review the available modules:
+* Review the available modules. e.g:
 <pre>
 [root@centos62 ~]# which rerun
 /usr/bin/rerun
@@ -48,23 +71,11 @@ Available modules in "/usr/lib/rerun/modules":
   stubbs: "Simple rerun module builder"
 </pre>
 
-* Note that several commands rely on xmlstarlet(1) (which is available from [EPEL](http://fedoraproject.org/wiki/EPEL)).
-
-An example of using the Rerun Rundeck module from installing, creating a project, starting the server, and creating a job
-------------
-* Install, create a project, start the Rundeck server, and create a job
+* Note that several commands rely on xmlstarlet(1) which is available for installation from [EPEL](http://fedoraproject.org/wiki/EPEL):
 <pre>
-[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:install
-Failed to set locale, defaulting to C
-Failed to set locale, defaulting to C
-[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:create-project
-[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:create-project --name test
-[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:start  
-Starting rundeckd:                                         [  OK  ]
-nohup: redirecting stderr to stdout
-[chuck@mvn-sdp-0 rundeck]$ rerun rundeck:create-job --file /home/chuck/workspace/rerun-modules/rundeck/examples/jobs/rundeck-hello-world/job.xml 
+[root@centos62 ~]# yum -y install xmlstarlet
+.
+.
+.
+Complete!
 </pre>
-
-
-
-
