@@ -2,7 +2,7 @@
 
 This [Rerun](http://rerun.github.com/rerun) module automates standard practice for installation, management and operations of [Rundeck](http://rundeck.org) based on the [Red Hat/CentOS/Fedora](http://repo.rundeck.org/latest.rpm) distribution that results in the instance running as the rundeck user out of /var/lib/rundeck.
 
-The Rundeck instance deployed by the module preserves the default authentication and authorization access control.
+The Rundeck instance deployed by the module preserves the default [authentication](http://rundeck.org/docs/administration/authentication.html) and [authorization](http://rundeck.org/docs/administration/authorization.html) access control.
 
 The commands are written with the expectation that they will be run by a non-root user that has sudo(8) access to run a number of commands (listed below).
 
