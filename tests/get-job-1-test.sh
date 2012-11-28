@@ -55,6 +55,6 @@ it_runs_with_uuid() {
 
     rm -f "${tmpJobXmlGet}"
 
-    #rerun rundeck:remove
+    rerun rundeck:stop
 
 }
