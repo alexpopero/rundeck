@@ -3,4 +3,4 @@
 # Tue Nov 13 14:50:32 PST 2012
 NAME=restart
 DESCRIPTION="Restart the rundeck service"
-OPTIONS=
+OPTIONS=""
